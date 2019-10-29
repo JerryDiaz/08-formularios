@@ -16,8 +16,22 @@ export class TemplateComponent {
   Usuario:Object={
     nombre: null,
     apellido: null,
-    correo:null
+    correo:null,
+    pais: "",
+    sexo:"Hombre",
+    acepta: false
   }
+
+  paises = [{
+      codigo: "NIC",
+      nombre: "Nicaragua"
+  },
+  {
+    codigo: "ESP",
+    nombre: "España"
+  }]
+
+  sexos:string[] = ["Hombre","Mujer","Sin definar"]
 
   constructor() { }
 
