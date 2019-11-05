@@ -2,9 +2,10 @@
 <hr>
 <form [formGroup]="forma" (ngSubmit)="guardarCambios()">
 
-  <div>
+  <div formGroupName="nombreCompleto">
+<!--  [ngClass]="{'has-danger': !forma.get('nombre').valid}" -->
 
-    <div class="form-group row" [ngClass]="{'has-danger': !forma.get('nombre').valid}">
+    <div class="form-group row"  [ngClass]="{'has-danger': !forma.controls['nombreCompleto'].controls['nombre'].valid}">
       <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
 
@@ -12,11 +13,11 @@
                type="text"
                placeholder="Nombre"
                formControlName="nombre">
-        <div *ngIf="forma.controls['nombre'].errors?.required"
+        <div *ngIf="forma.get('nombreCompleto.nombre').errors?.required"
             class="form-control-feedback">
             El nombre es necesario.
         </div>
-        <div *ngIf="forma.controls['nombre'].errors?.minlength"
+        <div *ngIf="forma.get('nombreCompleto.nombre').errors?.minlength"
             class="form-control-feedback">
             al menos 3 caracteres.
         </div>
@@ -47,7 +48,19 @@
     </div>
   </div>
 
-
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Pasatiempos</label>
+    <div class="col-md-8" formArrayName="pasatiempos">
+      <input *ngFor="let pasatiempo of forma.controls['pasatiempos'].controls; let i=index"
+            [formControlName]="i" 
+            type="text"
+            class="form-control"
+             >
+    </div>
+    <button (click)="agregarPasatiempo()"
+            type="button"
+            class="btn btn-primary">Nuevo</button>
+  </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
